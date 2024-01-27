@@ -1,4 +1,4 @@
-import Login from "./Login";
+import SignIn from "./SignIn";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "./props";
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(SignIn);

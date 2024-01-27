@@ -4,6 +4,9 @@ import {
 
 const initialState = {
   testingState: '',
+  activeUserDetails: {},
+  allBooksBooks: [],
+  
 };
 
 const reducer = (state = initialState, action) => {

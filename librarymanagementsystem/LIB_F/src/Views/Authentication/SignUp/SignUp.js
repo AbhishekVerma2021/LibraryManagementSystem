@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Navigate, useNavigate } from 'react-router-dom';
-import Loader from '../../../components/Loader'
+// import Loader from '../../../components/Loader'
 import './SignUp.css'
 
 function Copyright(props) {

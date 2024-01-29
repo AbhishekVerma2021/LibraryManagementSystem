@@ -1,0 +1,15 @@
+.createBookFormMasterContainer{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+  background-image: url(../../Images/createBook.svg) !important;
+  background-repeat: no-repeat !important;
+  background-size: 45% !important;
+  background-position: right bottom !important;
+}
+
+.createBookFormMasterContainer > div {
+  width: 50% !important;
+}

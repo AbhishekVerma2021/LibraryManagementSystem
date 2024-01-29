@@ -1,0 +1,93 @@
+.masterProfileBooksContainer {
+  width: 100%;
+  font-weight: 700;
+}
+
+.masterProfileBooksContainer>div {
+  width: 100%;
+}
+
+.masterProfileUserDetails {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+  margin: 2% 0 1% 0;
+}
+
+.masterProfileBooksCardContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  width: 100%;
+  place-items: center;
+}
+
+.horizontalDividerContainer {
+  margin: 3% 0;
+}
+
+.horizontalDividerContainer > hr {
+  width: 80%;
+  height: 1px;
+  border: none;
+  background-color: #1976d2;
+}
+
+.userFurtherDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.masterNoBooksOnProfileContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* border: 2px solid; */
+  width: 100% !important;
+  font-size: 20px;
+  gap: 20px;
+}
+
+.masterNoBooksOnProfileContainer>img {
+  height: 300px;
+}
+
+@media only screen and (max-width: 1250px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .masterProfileBooksCardContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

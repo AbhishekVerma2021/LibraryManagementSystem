@@ -61,7 +61,10 @@ const loginUser = async (req, res) => {
     })
   } else {
     try {
-      const user = await Users.findOne({ email });
+      const user = await Users.findOne({ email }).populate({
+        path: 'books.book',
+        model: 'BOOK',
+      });
       if (!user) {
         res.status(404).send({
           error: "User Not Found",
@@ -82,14 +85,16 @@ const loginUser = async (req, res) => {
             username: user.username,
           };
           const secretKey = 'MY_SECRET_KEY_ABHISHEK_VERMA';
-          jwt.sign(payload, secretKey, { expiresIn: 86400 }, (err, token) => {
+          jwt.sign(payload, secretKey, { expiresIn: 86400 }, async (err, token) => {
             if (err) {
               res.json({
                 message: err,
               });
             }
             else {
-              return res.status(200).json({ user, token });
+              const userWithBooks = await Users.findById(user._id).populate('books');
+
+              return res.status(200).json({ user: userWithBooks, token });
             };
           });
         };
@@ -101,7 +106,25 @@ const loginUser = async (req, res) => {
   }
 };
 
+const validateToken = async (req, res) => {
+  const { user } = req;
+  try {
+    const userWithBooks = await Users.findById(user._id).populate('books');
+    res.status(200).send({
+      message: 'Request is authenticated!!',
+      user: userWithBooks,
+    });
+  }
+  catch(err) {
+    res.status(500).json({
+      error: err,
+      message: 'Internal Server Error!!',
+    })
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  validateToken,
 }

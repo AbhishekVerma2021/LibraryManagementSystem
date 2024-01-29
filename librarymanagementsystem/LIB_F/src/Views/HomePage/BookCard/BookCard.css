@@ -1,0 +1,13 @@
+.descriptionContainer {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardContentContainer{
+  padding: 5px auto;
+  height: 27%;
+  /* border: 2px solid red; */
+}

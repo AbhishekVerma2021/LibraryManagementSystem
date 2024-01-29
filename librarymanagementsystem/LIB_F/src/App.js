@@ -7,52 +7,49 @@ import Profile from "./Views/Profile";
 import Sidenav from "./Views/Sidenav";
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FullPageLoader from "./Components/FullPageLoader";
+
+import './App.css';
+
+
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
+      <div className="routerContainer">
+        <Router>
+          <Routes>
           <Route
-            path='/' element={
+              path='/' element={
+                <Sidenav>
+                  <ProtectedRoute componentPath={'/'} Component={HomePage} />
+                </Sidenav>
+              }
+            />
+            <Route
+              path='/library' element={
+                <Sidenav>
+                  <ProtectedRoute componentPath={'/library'} Component={HomePage} />
+                </Sidenav>
+              }
+            />
+            <Route path='/profile' element={
               <Sidenav>
-                <ProtectedRoute componentPath={'/'} Component={HomePage} />
+                <ProtectedRoute componentPath={'/profile'} Component={Profile} />
               </Sidenav>
             }
-          />
-          <Route path='/profile' element={
-            <Sidenav>
-              <ProtectedRoute componentPath={'/profile'} Component={Profile} />
-            </Sidenav>
-          }
-          />
-          <Route path='/createBook' element={
-            <Sidenav>
-              <ProtectedRoute componentPath={'/createBook'} Component={CreateBook} />
-            </Sidenav>
-          }
-          />
-          {/* <Route path='/favorites' element={
-            <Sidenav>
-              <ProtectedRoute componentPath={'/favorites'} Component={Favourites} />
-            </Sidenav>
-          }
-          />
-          <Route path='/commanProfile' element={
-            <Sidenav>
-              <ProtectedRoute componentPath={'/commanProfile'} Component={CommanProfileView} />
-            </Sidenav>
-          }
-          />
-          <Route path='/messages' element={
-            <Sidenav>
-              <ProtectedRoute componentPath={'/messages'} Component={UserChatView} />
-            </Sidenav>
-          }
-          /> */}
-          <Route path='/login' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
-        </Routes>
-      </Router>
+            />
+            <Route path='/createBook' element={
+              <Sidenav>
+                <ProtectedRoute componentPath={'/createBook'} Component={CreateBook} />
+              </Sidenav>
+            }
+            />
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/signup' element={<SignUp />} />
+          </Routes>
+        </Router>
+      </div>
+      <FullPageLoader/>
       <ToastContainer />
     </div>
   );

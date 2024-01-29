@@ -1,0 +1,17 @@
+.menuForBookAction div:nth-child(3){
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.dateStampContainer {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actionIcons {
+  /* border: 1px solid red !important; */
+  background-color: rgb(227, 227, 227) !important;
+}

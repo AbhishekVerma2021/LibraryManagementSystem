@@ -9,7 +9,7 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  catagory: {
+  category: {
     type: String,
     required: true,
   },
@@ -23,7 +23,7 @@ const bookSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'USER',
     required: true
   },
   date: {

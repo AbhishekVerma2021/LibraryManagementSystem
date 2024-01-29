@@ -11,7 +11,7 @@ export const mapDispatchToProps = (dispatch) => ({
 export const mapStateToProps = (state) => ({
   // ussToken: state.ussToken,
   // isUserLoggedIn: state.isUserLoggedIn,
-  // activeUserDetails: state.activeUserDetails,
+  activeUserDetails: state.activeUserDetails,
   // pageHeaderText: state.pageHeaderText,
   // allUsersList: state.allUsersList,
 });

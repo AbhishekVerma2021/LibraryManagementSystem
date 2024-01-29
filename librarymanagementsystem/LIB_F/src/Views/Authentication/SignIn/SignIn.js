@@ -34,12 +34,12 @@ const defaultTheme = createTheme();
 const SignIn = (props) => {
   const navigate = useNavigate();
 
-  const { loginUser, validateLoginStatus } = props;
+  const { handleSignIn, validateToken } = props;
   const [loginStatus, setLoginStatus] = useState(false);
   useEffect(() => {
     const checkIsUserLoggedIn = async () => {
       try {
-        await validateLoginStatus(navigate);
+        await validateToken('/', navigate);
         setLoginStatus(true);
       }
       catch (er) {
@@ -55,7 +55,7 @@ const SignIn = (props) => {
     const email = data.get('email');
     const password = data.get('password');
     try {
-      await loginUser(email, password, navigate);
+      await handleSignIn(email, password, navigate);
     } catch (error) {
       console.error('Login failed:', error);
     }

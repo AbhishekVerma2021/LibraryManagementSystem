@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 
-const userBooks= new mongoose.Schema({
-  
-});
+// const userBooksSchema = new mongoose.Schema({
+//   book: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'BOOK',
+//   },
+//   date: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// });
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -20,12 +27,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BOOK',
+  }],
   date: {
     type: Date,
     default: Date.now,
   },
 });
 
-const Users= new mongoose.model("User",userSchema);
+const Users = new mongoose.model("USER", userSchema);
 
-module.exports=Users;
+module.exports = Users;

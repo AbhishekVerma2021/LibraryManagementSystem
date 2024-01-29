@@ -1,0 +1,11 @@
+.editBookFormMasterContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+.editBookFormMasterContainer > div {
+  width: 100% !important;
+}

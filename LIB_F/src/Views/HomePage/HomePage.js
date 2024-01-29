@@ -13,6 +13,20 @@ const HomePage = (props) => {
   const [titleName, setTitleName] = useState('');
   const [categoryName, setCategoryName] = useState('');
   const [selectedBooksData, setSelectedBooksData] = useState([]);
+
+
+  const getBooksDataFromRedux = async () => {
+    try {
+      await getAllBooks();
+    }
+    catch (err) {
+      alert('Something went wrong!!');
+    };
+  };
+  useEffect(() => {
+    getBooksDataFromRedux();
+  });
+
   useEffect(() => {
     setSelectedBooksData(allBooksData);
     setSelectedFilter('all');
@@ -64,6 +78,7 @@ const HomePage = (props) => {
           </TextField>
         </>);
       };
+      default: return null;
     }
   }
 

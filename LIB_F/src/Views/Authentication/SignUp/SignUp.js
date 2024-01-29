@@ -1,10 +1,8 @@
-import React,{ useRef, useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -13,7 +11,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Navigate, useNavigate } from 'react-router-dom';
-// import Loader from '../../../components/Loader'
 import './SignUp.css'
 
 function Copyright(props) {
@@ -27,16 +24,12 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
+};
 
 const defaultTheme = createTheme();
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const SignUp = (props) => {
-  const { handleSignUp, userRegistrationSuccessful, activeUserDetails } = props;
+  const { handleSignUp, userRegistrationSuccessful } = props;
   
   const navigate = useNavigate();
 
@@ -183,10 +176,6 @@ const SignUp = (props) => {
                 helperText={passwordMatch ? '' : 'Please enter same password again'}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               {inputError && <div className='errorForSubmitForm'>Please check the details entered</div>}
               <Button
                 type="submit"
@@ -211,7 +200,6 @@ const SignUp = (props) => {
           </Box>
         </Grid>
       </Grid>
-      {/* <Loader isLoading={isLoading}/> */}
     </ThemeProvider>
   );
 }

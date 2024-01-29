@@ -109,6 +109,7 @@ const reducer = (state = initialState, action) => {
     case VALIDATE_TOKEN_PENDING: {
       return {
         ...state,
+        isFullPageLoading: true,
       }
     };
     case VALIDATE_TOKEN_FULFILLED: {
@@ -118,6 +119,7 @@ const reducer = (state = initialState, action) => {
         ussToken: token,
         activeUserDetails: user,
         isUserLoggedIn: true,
+        isFullPageLoading: false,
       }
     };
     case VALIDATE_TOKEN_REJECTED: {
@@ -125,6 +127,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isUserLoggedIn: false,
+        isFullPageLoading: false,
       }
     };
 

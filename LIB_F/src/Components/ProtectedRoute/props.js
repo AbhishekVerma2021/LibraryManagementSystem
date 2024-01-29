@@ -8,4 +8,5 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export const mapStateToProps = (state) => ({
   isUserLoggedIn: state.isUserLoggedIn,
+  isFullPageLoading: state.isFullPageLoading,
 });

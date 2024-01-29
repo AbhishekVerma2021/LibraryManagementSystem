@@ -29,7 +29,7 @@ const registerUser = async (req, res) => {
           }
           newUser.set("password", hashedPassword);
           newUser.save().then(() => {
-            res.status(201).send('Registration successful');
+            res.status(201).send({ message: 'Registration successful. Please login!' });
           })
             .catch((er) => {
               res.status(500).send({
@@ -93,8 +93,14 @@ const loginUser = async (req, res) => {
             }
             else {
               const userWithBooks = await Users.findById(user._id).populate('books');
-
-              return res.status(200).json({ user: userWithBooks, token });
+              const userWithoutPassword = {
+                _id: userWithBooks._id,
+                books: userWithBooks.books,
+                date: userWithBooks.date,
+                username: userWithBooks.username,
+                email: userWithBooks.email,
+              }
+              return res.status(200).json({ user: userWithoutPassword, token, message: `Welcome ${userWithBooks.username}` });
             };
           });
         };
@@ -115,7 +121,7 @@ const validateToken = async (req, res) => {
       user: userWithBooks,
     });
   }
-  catch(err) {
+  catch (err) {
     res.status(500).json({
       error: err,
       message: 'Internal Server Error!!',

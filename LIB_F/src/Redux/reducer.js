@@ -28,7 +28,6 @@ const initialState = {
   testingState: '',
   activeUserDetails: {},
   allBooksData: [],
-  // activeUserDetails: {},
   ussToken: '',
   isUserLoggedIn: false,
   isFullPageLoading: false,
@@ -50,10 +49,11 @@ const reducer = (state = initialState, action) => {
       }
     };
     case LOGIN_USER_FULFILLED: {
-      const { user, token } = action.payload;
+      const { user, token, message } = action.payload;
       if (token) {
         localStorage.setItem("TOKEN", token);
       };
+      toast.success(message);
       return {
         ...state,
         ussToken: token,
@@ -63,7 +63,8 @@ const reducer = (state = initialState, action) => {
       };
     };
     case LOGIN_USER_REJECTED: {
-      // localStorage.clear();
+      const { message } = action.payload;
+      toast.error(message);
       return {
         ...state,
         isUserLoggedIn: false,
@@ -72,11 +73,12 @@ const reducer = (state = initialState, action) => {
     };
 
     case LOGOUT_USER_FULFILLED: {
+      toast.success('Looged out successfully!')
       localStorage.clear();
       return {
-        ...state,
-      }
-    }
+        ...initialState,
+      };
+    };
 
     case SUBMIT_USER_PENDING: {
       return {
@@ -85,12 +87,16 @@ const reducer = (state = initialState, action) => {
       }
     };
     case SUBMIT_USER_FULFILLED: {
+      const { message } = action.payload;
+      toast.success(message);
       return {
         ...state,
         isFullPageLoading: false,
       };
     };
     case SUBMIT_USER_REJECTED: {
+      const { message } = action.payload;
+      toast.error(message);
       return {
         ...state,
         isFullPageLoading: false,
@@ -112,8 +118,7 @@ const reducer = (state = initialState, action) => {
       }
     };
     case VALIDATE_TOKEN_REJECTED: {
-      // const { message } = action.payload;
-      // toast.error(message);
+      toast.error('You are not authenticated. Please login!!')
       return {
         ...state,
         isUserLoggedIn: false,
@@ -127,7 +132,6 @@ const reducer = (state = initialState, action) => {
       };
     };
     case CREATE_BOOK_FULFILLED: {
-      // console.log(action.payload)
       const { book, message } = action.payload;
       toast.success(message, {
         position: 'top-right',
@@ -174,7 +178,6 @@ const reducer = (state = initialState, action) => {
     };
 
     case DELETE_BOOK_PENDING: {
-      // toast.promise('Deleting Book!!')
       return {
         ...state,
         isFullPageLoading: true,
@@ -199,6 +202,8 @@ const reducer = (state = initialState, action) => {
       };
     };
     case DELETE_BOOK_REJECTED: {
+      const { message } = action.payload;
+      toast.error(message);
       return {
         ...state,
         isFullPageLoading: false,

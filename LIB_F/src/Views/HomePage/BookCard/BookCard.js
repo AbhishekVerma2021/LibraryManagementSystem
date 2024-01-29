@@ -19,11 +19,11 @@ const BookCard = (props) => {
       />
       <CardContent className='cardContentContainer'>
         <Tooltip title={description}>
-          {/* <div className='titleContainer'> */}
-          <Typography gutterBottom variant="h5" component="div" >
-            {title}
-          </Typography>
-          {/* </div> */}
+          <Tooltip title={title} placement='right'>
+            <Typography gutterBottom variant="h5" component="div" className='cardBookTitle' >
+              {title}
+            </Typography>
+          </Tooltip>
           <Typography variant="body2" color="text.primary" className='descriptionContainer'>
             By: {author}
           </Typography>

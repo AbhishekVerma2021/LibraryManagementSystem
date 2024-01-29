@@ -80,10 +80,9 @@ const updateBook = async (req, res) => {
           message: `No book found with the ID ${book_id}.`,
         });
       };
-      res.status(200).send({ book: updatedBook });
+      res.status(200).send({ book: updatedBook, message: 'Successfully updated books details!' });
     }
     catch (err) {
-      // console.log(err)
       res.status(500).json({ error: err, message: "Internal Server Error!!!" });
     };
   };

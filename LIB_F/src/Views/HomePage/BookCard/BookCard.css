@@ -2,6 +2,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -9,5 +10,12 @@
 .cardContentContainer{
   padding: 5px auto;
   height: 27%;
-  /* border: 2px solid red; */
+}
+
+.cardBookTitle {
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

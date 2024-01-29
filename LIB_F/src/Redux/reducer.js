@@ -19,6 +19,9 @@ import {
   DELETE_BOOK_REJECTED,
   DELETE_BOOK_FULFILLED,
   DELETE_BOOK_PENDING,
+  UPDATE_BOOK_FULFILLED,
+  UPDATE_BOOK_PENDING,
+  UPDATE_BOOK_REJECTED,
 } from './actionTypes';
 
 import { toast } from 'react-toastify';
@@ -155,6 +158,34 @@ const reducer = (state = initialState, action) => {
         isFullPageLoading: false,
       };
     };
+
+    case UPDATE_BOOK_PENDING: {
+      return {
+        ...state,
+        isFullPageLoading: true,
+      };
+    };
+
+    case UPDATE_BOOK_FULFILLED: {
+      const { book } = action.payload;
+      const updatedUserBooks = state.activeUserDetails.books.map(userBook => userBook._id === book._id ? book : userBook);
+      return {
+        ...state,
+        isFullPageLoading: false,
+        activeUserDetails: {
+          ...state.activeUserDetails,
+          books: updatedUserBooks,
+        }
+      };
+    };
+
+    case UPDATE_BOOK_REJECTED: {
+      const { message } = action.payload;
+      toast.error(message);
+      return {
+        ...state,
+      }
+    }
 
     case GET_ALL_BOOKS_PENDING: {
       return {

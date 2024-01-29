@@ -113,24 +113,24 @@ const ProfileBookCard = (props) => {
         title={title}
       />
       {/* <CardContent className='cardContentContainer'> */}
-        <CardContent className='cardContentContainer'>
-          <Tooltip title={description}>
-            {/* <div className='titleContainer'> */}
-            <Typography gutterBottom variant="h5" component="div" >
+      <CardContent className='cardContentContainer'>
+        <Tooltip title={description}>
+          <Tooltip title={title} placement='right'>
+            <Typography gutterBottom variant="h5" component="div" className='cardBookTitle' >
               {title}
             </Typography>
-            {/* </div> */}
-            <Typography variant="body2" color="text.primary" className='descriptionContainer'>
-              By: {author}
-            </Typography>
-            <Typography variant="body2" color="text.primary" className='descriptionContainer'>
-              Genere: {category}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" className='descriptionContainer'>
-              Description: {description}
-            </Typography>
           </Tooltip>
-        </CardContent>
+          <Typography variant="body2" color="text.primary" className='descriptionContainer'>
+            By: {author}
+          </Typography>
+          <Typography variant="body2" color="text.primary" className='descriptionContainer'>
+            Genere: {category}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" className='descriptionContainer'>
+            Description: {description}
+          </Typography>
+        </Tooltip>
+      </CardContent>
       {/* </CardContent> */}
       <EditBookDialog open={openEditBookDialog} book={book} setOpenEditBookDialog={setOpenEditBookDialog} />
       <ConfirmationDialog open={openDeleteBookDialog} onConfirm={handleDeleteBook} setOpen={setOpenDeleteBookDialog} title={'Are you sure to delete this book?'} warning={true} />

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import notAuthImage from '../../Images/notAuthorizaed.svg';
 const ProtectedRoute = (props) => {
-  const { Component, validateToken, isUserLoggedIn, componentPath } = props;
+  const { children, validateToken, isUserLoggedIn, componentPath } = props;
   const [shouldRender, setShouldRender] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -19,7 +19,13 @@ const ProtectedRoute = (props) => {
     setShouldRender(isUserLoggedIn)
   }, [isUserLoggedIn])
   return (<>
-    {shouldRender && <Component />}
+    {isUserLoggedIn ? shouldRender && children :
+      <div className='notAuthorizedPage'>
+        <img src={notAuthImage} alt="" />
+        <div>
+          You are not authorized to access this page!! <Link style={{ color: '#1976d2' }} to='/login'>Please Login</Link>
+        </div>
+      </div>}
   </>)
 }
 

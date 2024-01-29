@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ProfileBookCard.css';
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Menu, Tooltip, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -9,7 +9,7 @@ import EditBookDialog from '../EditBookDialog';
 import ConfirmationDialog from '../../../Components/ConfirmationDialog';
 
 const ProfileBookCard = (props) => {
-  const { book, activeUserDetails: { username, email }, deleteBook } = props;
+  const { book, activeUserDetails: { username }, deleteBook } = props;
   const { author, description, image, title, category, date, _id } = book;
 
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -53,7 +53,7 @@ const ProfileBookCard = (props) => {
   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(inputDate);
 
   return (<>
-    <Card sx={{ width: '100%', height: '60vh', }}>
+    <Card sx={{ width: '100%', height: '50vh', }}>
       <Menu
         id="menu-appbar"
         anchorEl={openDropdown}
@@ -112,24 +112,26 @@ const ProfileBookCard = (props) => {
         image={image}
         title={title}
       />
-      <CardContent className='cardContentContainer'>
-        {/* <div className='titleContainer'> */}
-        <Tooltip title={title}>
-          <Typography gutterBottom variant="h5" component="div" >
-            {title}
-          </Typography>
-        </Tooltip>
-        {/* </div> */}
-        <Tooltip title={description}>
-          <Typography variant="body2" color="text.secondary" className='descriptionContainer'>
-            {description}
-          </Typography>
-        </Tooltip>
-      </CardContent>
-      <CardActions>
-        <Button size="small">{category}</Button>
-        <Button size="small">{author}</Button>
-      </CardActions>
+      {/* <CardContent className='cardContentContainer'> */}
+        <CardContent className='cardContentContainer'>
+          <Tooltip title={description}>
+            {/* <div className='titleContainer'> */}
+            <Typography gutterBottom variant="h5" component="div" >
+              {title}
+            </Typography>
+            {/* </div> */}
+            <Typography variant="body2" color="text.primary" className='descriptionContainer'>
+              By: {author}
+            </Typography>
+            <Typography variant="body2" color="text.primary" className='descriptionContainer'>
+              Genere: {category}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" className='descriptionContainer'>
+              Description: {description}
+            </Typography>
+          </Tooltip>
+        </CardContent>
+      {/* </CardContent> */}
       <EditBookDialog open={openEditBookDialog} book={book} setOpenEditBookDialog={setOpenEditBookDialog} />
       <ConfirmationDialog open={openDeleteBookDialog} onConfirm={handleDeleteBook} setOpen={setOpenDeleteBookDialog} title={'Are you sure to delete this book?'} warning={true} />
     </Card>

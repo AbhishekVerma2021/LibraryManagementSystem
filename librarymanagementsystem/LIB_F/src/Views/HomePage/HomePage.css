@@ -12,10 +12,10 @@
 }
 
 .filtersContainer {
-  height: 10%;
+  margin: 20px 0;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1250px) {
@@ -24,17 +24,28 @@
   }
 }
 
+/* @media only screen and (max-width: 1100px) {
+  .filtersContainer{
+    height: 5%;
+  }
+} */
 
 @media only screen and (max-width: 1000px) {
   .homePageMasterContainer {
     grid-template-columns: repeat(3, 1fr);
   }
+  /* .filtersContainer{
+    height: 2%;
+  } */
 }
 
 @media only screen and (max-width: 850px) {
   .homePageMasterContainer {
     grid-template-columns: repeat(2, 1fr);
   }
+  /* .filtersContainer{
+    height: 3%;
+  } */
 }
 
 @media only screen and (max-width: 700px) {

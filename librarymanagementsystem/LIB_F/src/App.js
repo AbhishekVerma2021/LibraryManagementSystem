@@ -8,6 +8,7 @@ import Sidenav from "./Views/Sidenav";
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FullPageLoader from "./Components/FullPageLoader";
+import Dashboard from "./Views/Dashboard";
 
 import './App.css';
 
@@ -18,30 +19,38 @@ function App() {
       <div className="routerContainer">
         <Router>
           <Routes>
-          <Route
+            <Route
               path='/' element={
-                <Sidenav>
-                  <ProtectedRoute componentPath={'/'} Component={HomePage} />
-                </Sidenav>
+                <ProtectedRoute componentPath={'/'}>
+                  <Sidenav>
+                    <Dashboard />
+                  </Sidenav>
+                </ProtectedRoute>
               }
             />
             <Route
               path='/library' element={
-                <Sidenav>
-                  <ProtectedRoute componentPath={'/library'} Component={HomePage} />
-                </Sidenav>
+                <ProtectedRoute componentPath={'/library'}>
+                  <Sidenav>
+                    <HomePage />
+                  </Sidenav>
+                </ProtectedRoute>
               }
             />
             <Route path='/profile' element={
-              <Sidenav>
-                <ProtectedRoute componentPath={'/profile'} Component={Profile} />
-              </Sidenav>
+              <ProtectedRoute componentPath={'/profile'}>
+                <Sidenav>
+                  <Profile />
+                </Sidenav>
+              </ProtectedRoute>
             }
             />
             <Route path='/createBook' element={
-              <Sidenav>
-                <ProtectedRoute componentPath={'/createBook'} Component={CreateBook} />
-              </Sidenav>
+              <ProtectedRoute componentPath={'/createBook'}>
+                <Sidenav>
+                  <CreateBook />
+                </Sidenav>
+              </ProtectedRoute>
             }
             />
             <Route path='/login' element={<SignIn />} />
@@ -49,7 +58,7 @@ function App() {
           </Routes>
         </Router>
       </div>
-      <FullPageLoader/>
+      <FullPageLoader />
       <ToastContainer />
     </div>
   );

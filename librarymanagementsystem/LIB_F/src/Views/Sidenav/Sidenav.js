@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,19 +16,10 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import HomeIcon from '@mui/icons-material/Home';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import LogoDevIcon from '@mui/icons-material/LogoDev';
 import './Sidenav.css';
 import { red } from '@mui/material/colors';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import notAuthImage from '../../Images/notAuthorizaed.svg';
+import { useNavigate } from 'react-router-dom';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
@@ -44,7 +35,6 @@ const Sidenav = (props) => {
   const navigate = useNavigate();
   const {
     children,
-    allUsersList,
     handleLogout,
     isUserLoggedIn,
   } = props;
@@ -53,11 +43,7 @@ const Sidenav = (props) => {
     activeUserDetails,
   } = props; // states
 
-  const { username, email, _id } = activeUserDetails;
-
-  const {
-
-  } = props; // actions
+  const { username, email } = activeUserDetails;
 
   const { window } = props;
   // =================================================================================================
@@ -150,82 +136,77 @@ const Sidenav = (props) => {
 
 
   return (<>
-    {isUserLoggedIn ? <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          // backgroundColor: 'red',
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Library at your finger tips
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+    {isUserLoggedIn &&
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
           sx={{
-            backgroundColor: '#FCEDDA',
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          // className='desktopScreenDrawer'
-          sx={{
-            // width: "50px !important",
             // backgroundColor: 'red',
-            border: '2px solid red',
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
           }}
-          open
         >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        className='boxContainerForFeedSection'
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, marginTop: "50px" }}
-      >
-        {children}
-      </Box>
-    </Box> :
-      <div className='notAuthorizedPage'>
-        <img src={notAuthImage} alt="" />
-        <div>
-          You are not authorized to access this page!! <Link style={{ color: '#1976d2' }} to='/login'>Please Login</Link>
-        </div>
-      </div>}
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Library at your finger tips
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
+        >
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              backgroundColor: '#FCEDDA',
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            // className='desktopScreenDrawer'
+            sx={{
+              // width: "50px !important",
+              // backgroundColor: 'red',
+              border: '2px solid red',
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        <Box
+          component="main"
+          className='boxContainerForFeedSection'
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, marginTop: "50px" }}
+        >
+          {children}
+        </Box>
+      </Box>}
   </>
   );
 }

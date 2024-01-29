@@ -1,0 +1,153 @@
+.mastedDashboardContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mastedDashboardContainer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(../../Images/dashboard.svg);
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  transform: scaleX(-1);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.masterChartContainer {
+  height: fit-content;
+  width: 70%;
+}
+
+
+.chartContainer {
+  height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+.pieChartDetails > div {
+  width: 50%;
+}
+
+.pieChartDetails {
+  display: flex;
+  /* border: 2px solid red; */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.barChartDetails {
+  display: flex;
+  /* border: 2px solid red; */
+  align-items: center;
+  justify-content: space-between; 
+}
+
+.chartHeadeer {
+  display: flex;
+  font-size: 25px;
+  font-weight: 800;
+  justify-content: center;
+}
+
+.barChartHeader {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-evenly;
+  /* border: 2px solid blue; */
+  height: 200px;
+}
+.barChartHeader > div{
+  width: 100%;
+  height: 50%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+}
+
+.selectAuthorSelec {
+  width: 60%;
+  height: 50%;
+}
+
+.dividerDash {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.dividerDash > hr{
+  border: none;
+  width: 70%;
+  margin: 0 auto;
+  height: 45vh;
+  height: 1px;
+  background-color: #9a9a9a64;
+}
+
+
+.barChartDetails > div {
+  width: 50%;
+}
+
+.lineChartDetails {
+  display: flex;
+  /* border: 2px solid red; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lineChartDetails > div {
+  width: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+  .pieChartDetails {
+    flex-direction: column;
+  }
+  .barChartDetails {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .barChartHeader {
+    width: 100% !important;
+    flex-direction: row-reverse;
+    height: 50px;
+  }
+
+  .chartHeadeer > div {
+    height: 100%;
+  }
+  .selectAuthorSelec {
+    height: 100%;
+  }
+  .chartContainer {
+    width: 100% !important;
+  }
+  .masterChartContainer {
+    width: 100%;
+  }
+  .pieChartDetails > div {
+    width: 100%;
+    justify-content: center;
+  }
+  .chartHeadeer {
+    justify-content: start !important;
+    margin: 20px 0;
+  }
+  .lineChartDetails {
+    flex-direction: column;
+  }
+  .lineChartDetails > div {
+    width: 100%;
+  }
+}
+

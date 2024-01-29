@@ -13,18 +13,6 @@ const HomePage = (props) => {
   const [titleName, setTitleName] = useState('');
   const [categoryName, setCategoryName] = useState('');
   const [selectedBooksData, setSelectedBooksData] = useState([]);
-  const getBooksDataFromRedux = async () => {
-    try {
-      await getAllBooks();
-    }
-    catch (err) {
-      alert('Something went wrong!!');
-    };
-  };
-  useEffect(() => {
-    getBooksDataFromRedux();
-  }, []);
-
   useEffect(() => {
     setSelectedBooksData(allBooksData);
     setSelectedFilter('all');
@@ -85,14 +73,19 @@ const HomePage = (props) => {
     switch (selectedFilter) {
       case 'authorName': {
         filteredData = allBooksData.filter((book) => book.author.toLowerCase().includes(authorName.toLowerCase()));
+        break;
       }
       case 'titleName': {
         filteredData = allBooksData.filter((book) => book.title.toLowerCase().includes(titleName.toLowerCase()));
+        break;
       };
       case 'category': {
-        filteredData = allBooksData.filter((book) => book.category.toLowerCase().includes(categoryName.toLowerCase()))
+        filteredData = allBooksData.filter((book) => book.category.toLowerCase().includes(categoryName.toLowerCase()));
+        break;
       };
-    }
+      default: break;
+    };
+    console.log(filteredData);
     setSelectedBooksData(filteredData);
   };
 

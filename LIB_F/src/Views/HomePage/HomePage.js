@@ -25,7 +25,7 @@ const HomePage = (props) => {
   };
   useEffect(() => {
     getBooksDataFromRedux();
-  });
+  }, []);
 
   useEffect(() => {
     setSelectedBooksData(allBooksData);

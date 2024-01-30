@@ -57,7 +57,6 @@ const SignIn = (props) => {
   const handleSubmit = async () => {
 
     try {
-      console.log(email,password)
       await handleSignIn(email, password, navigate);
     } catch (error) {
       alert('Something went wrong!!');

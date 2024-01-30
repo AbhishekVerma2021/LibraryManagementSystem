@@ -43,7 +43,6 @@ const registerUser = async (req, res) => {
       }
     }
     catch (err) {
-      console.log(err)
       res.status(500).send({
         error: err,
         message: "Server Error!!!"
@@ -116,6 +115,13 @@ const validateToken = async (req, res) => {
   const { user } = req;
   try {
     const userWithBooks = await Users.findById(user._id).populate('books');
+    const userWithoutPassword = {
+      _id: userWithBooks._id,
+      books: userWithBooks.books,
+      date: userWithBooks.date,
+      username: userWithBooks.username,
+      email: userWithBooks.email,
+    }
     res.status(200).send({
       message: 'Request is authenticated!!',
       user: userWithBooks,

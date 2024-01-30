@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Navigate, useNavigate } from 'react-router-dom';
 import './SignUp.css'
+import { Tooltip } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -30,7 +31,7 @@ const defaultTheme = createTheme();
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const SignUp = (props) => {
   const { handleSignUp, userRegistrationSuccessful } = props;
-  
+
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -38,49 +39,47 @@ const SignUp = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   const [validEmail, setValidEmail] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(false);
 
   const [inputError, setInputError] = useState(false);
 
-  useEffect(()=> {
+  useEffect(() => {
     const isValidEmail = EMAIL_REGEX.test(email);
     setValidEmail(isValidEmail);
     setPasswordMatch(password === confirmPassword);
+    setInputError(!email || !firstName || !lastName || !password || password.length <= 2 || firstName.length === 0 || lastName.length === 0 || email.length === 0);
   }, [email, password, confirmPassword])
 
   useEffect(() => {
-    if(userRegistrationSuccessful)
+    if (userRegistrationSuccessful)
       navigate('/login');
   }, [userRegistrationSuccessful])
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(!(
-      firstName
-      && lastName
-      && password
-      && email
-      && password.length > 2
-      && firstName.length > 0
-      && lastName.length > 0
-      && EMAIL_REGEX.test(email)))
-        setInputError(true);
-      else
-      {
-        const username = firstName + ' ' + lastName;
-        try{
-          await handleSignUp(username, email, password, navigate);
-        } catch(err) {
-          alert('Something Went Wrong')
-        }
+    if (
+      !firstName
+      || !lastName
+      || !password
+      || !email
+      || password.length <= 2
+      || firstName.length === 0
+      || lastName.length === 0
+      || !EMAIL_REGEX.test(email))
+      setInputError(true);
+    else {
+      const username = firstName + ' ' + lastName;
+      try {
+        await handleSignUp(username, email, password, navigate);
+      } catch (err) {
+        alert('Something Went Wrong')
       }
+    }
   };
 
 
-  
-  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -176,16 +175,17 @@ const SignUp = (props) => {
                 helperText={passwordMatch ? '' : 'Please enter same password again'}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              {inputError && <div className='errorForSubmitForm'>Please check the details entered</div>}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                disabled={!validEmail || !passwordMatch || inputError}
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
+              <Tooltip title={!validEmail || !passwordMatch || inputError ? 'Check and enter all the required details correctly!!' : 'Click to register into library!!'}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled={!validEmail || !passwordMatch || inputError}
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign Up
+                </Button>
+              </Tooltip>
               <Grid container>
                 <Grid item>
                   <Navigate to='/login'>

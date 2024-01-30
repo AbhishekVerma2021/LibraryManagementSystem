@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as NavigateTo, useNavigate } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 
 function Copyright(props) {
@@ -18,13 +19,14 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Library management system
+        MyLIB
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 
 const defaultTheme = createTheme();
@@ -32,6 +34,10 @@ const SignIn = (props) => {
   const navigate = useNavigate();
 
   const { handleSignIn, validateToken } = props;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [inputError, setInputError] = useState(true);
   useEffect(() => {
     const checkIsUserLoggedIn = async () => {
       try {
@@ -44,15 +50,17 @@ const SignIn = (props) => {
     checkIsUserLoggedIn();
   }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
+  useEffect(() => {
+    setInputError(!password || password.lengtth === 0 || !email || email.lrngth === 0 || !EMAIL_REGEX.test(email));
+  }, [email, password]);
+
+  const handleSubmit = async () => {
+
     try {
+      console.log(email,password)
       await handleSignIn(email, password, navigate);
     } catch (error) {
-      console.error('Login failed:', error);
+      alert('Something went wrong!!');
     }
   };
 
@@ -91,7 +99,7 @@ const SignIn = (props) => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -99,6 +107,7 @@ const SignIn = (props) => {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   autoFocus
                 />
@@ -109,23 +118,23 @@ const SignIn = (props) => {
                   name="password"
                   label="Password"
                   type="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   autoComplete="current-password"
                 />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
+                <Tooltip title={inputError ? 'Please verify and fill all required fields!!' : 'Click to sign in into library!!'}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    onClick={() => handleSubmit()}
+                    disabled={inputError}
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                </Tooltip>
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
                   <Grid item>
                     <NavigateTo to='/signup'>
                       <Link href="#" variant="body2">

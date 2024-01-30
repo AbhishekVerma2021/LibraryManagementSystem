@@ -44,8 +44,7 @@ export const handleSignIn = (email, password, navigate) => {
         navigate('/');
       })
       .catch((err) => {
-        dispatch({ type: LOGIN_USER_REJECTED, payload: err });
-        // navigate('/login');
+        dispatch({ type: LOGIN_USER_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -63,7 +62,7 @@ export const handleSignUp = (username, email, password, navigate) => {
         navigate('/login');
       })
       .catch((err) => {
-        dispatch({ type: SUBMIT_USER_REJECTED, payload: err });
+        dispatch({ type: SUBMIT_USER_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -83,7 +82,7 @@ export const validateToken = (componentPath, navigate) => {
         navigate(componentPath);
       })
       .catch((err) => {
-        dispatch({ type: VALIDATE_TOKEN_REJECTED, payload: err });
+        dispatch({ type: VALIDATE_TOKEN_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -96,7 +95,7 @@ export const getAllBooks = () => {
         dispatch({ type: GET_ALL_BOOKS_FULFILLED, payload: res.data });
       })
       .catch((err) => {
-        dispatch({ type: GET_ALL_BOOKS_REJECTED, payload: err });
+        dispatch({ type: GET_ALL_BOOKS_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -109,7 +108,7 @@ export const createBook = (title, author, category, description, image) => {
         dispatch({ type: CREATE_BOOK_FULFILLED, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: CREATE_BOOK_REJECTED, payload: err });
+        dispatch({ type: CREATE_BOOK_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -129,7 +128,7 @@ export const editBook = (title, author, category, description, base64, _id) => {
         dispatch({ type: UPDATE_BOOK_FULFILLED, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: UPDATE_BOOK_REJECTED, payload: err });
+        dispatch({ type: UPDATE_BOOK_REJECTED, payload: err.response.data });
       });
   };
 };
@@ -145,7 +144,7 @@ export const deleteBook = (_id) => {
         dispatch({ type: DELETE_BOOK_FULFILLED, payload: res.data })
       })
       .catch(err => {
-        dispatch({ type: DELETE_BOOK_REJECTED, payload: err });
+        dispatch({ type: DELETE_BOOK_REJECTED, payload: err.response.data });
       });
   };
 };

@@ -99,6 +99,7 @@ const reducer = (state = initialState, action) => {
     };
     case SUBMIT_USER_REJECTED: {
       const { message } = action.payload;
+      console.log(action.payload)
       toast.error(message);
       return {
         ...state,
